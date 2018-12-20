@@ -8,6 +8,10 @@ const cheerio = require("cheerio");
 //Initialize express
 const app = express();
 
+//Database config 
+const databaseUrl = "scrapehw";
+const collections = ["scrapeData"];
+
 //Database configuration 
 const db = mongojs(databaseUrl, collections);
 db.on("error", function(error){
@@ -20,7 +24,10 @@ app.get("/", function (req, res){
 });
 
 //Retrieve data from the db 
-app.get("/all")
+app.get("/all", function(req, res){
+    //Find all results from the collection in the DB 
+
+})
 
 
 
