@@ -1,93 +1,54 @@
 //Dependencies 
 const express = require("express");
-const mongojs = require("mongojs");
-//Require axios and cheerio. Makes the scrapping possible 
-const axios = require("axios");
-const cheerio = require("cheerio");
+const logger = require("logger");
 const mongoose = require("mongoose");
 
-//Initialize express
-const app = express();
+//scrapping tools 
+const cheerio = require("cherrio");
+const axios = require("axios");
 
-//Database config 
-const databaseUrl = "scrapehw";
-const collections = ["scrapeData"];
+//models 
+const db = require("./models");
 
-//Database configuration 
-const db = mongojs(databaseUrl, collections);
-db.on("error", function(error){
-    console.log("Database error:", error);
-});
+const PORT = 3000;
 
-//Main route
-app.get("/", function (req, res){
-    res.send("Hello world");
-});
+//Initialize express 
 
-//Retrieve data from the db 
-app.get("/all", function(req, res){
-    //Find all results from the collection in the DB 
-    db.scrapedData.find({}, function(error, found){
-        if (error) {
-            console.log(error);
-        }
-        //if no error, send data as json
-        else {
-            res.json(found);
-        }
-    });
-});
+const express = require("express");
 
-// Scrape data from one site and place it into the mongodb db
-app.get("/scrape", function(req, res) {
-    // Make a request via axios for the news section of `ycombinator`
-    axios.get("https://news.ycombinator.com/").then(function(response) {
-      // Load the html body from axios into cheerio
-      var $ = cheerio.load(response.data);
-      // For each element with a "title" class
-      $(".title").each(function(i, element) {
-        // Save the text and href of each link enclosed in the current element
-        var title = $(element).children("a").text();
-        var link = $(element).children("a").attr("href");
-        console.log(link);
-        console.log(title);
-  
-        // If this found element had both a title and a link
-        if (title && link) {
-          // Insert the data in the scrapedData db
-          db.scrapedData.insert({
-            title: title,
-            link: link
-          },
-          function(err, inserted) {
-            if (err) {
-              // Log the error if one is encountered during the query
-              console.log(err);
-            }
-            else {
-              // Otherwise, log the inserted data
-              console.log(inserted);
-            }
-          });
-        }
-      });
-    });
-  
-    // Send a "Scrape Complete" message to the browser
-    res.send("Scrape Complete");
-  });
-  
-  
-  // Listen on port 3000
-  app.listen(3000, function() {
-    console.log("App running on port 3000!");
-  });
+//Use morgan logger for logging requests 
+app.use(logger("dev"));
+//Parse request body as JSON 
+app.use(express.urlencoded({ extended:true }));
+app.use(express.json());
+//Make public a static folder 
+app.use(express.static("public"));
+
+//Connect to the MONGO DB 
+mongoose.connect("mongodb://localhost/scrapperhw", { useNewUrlParser: true });
+
+//Routes 
+
+//A GET route for scraping the Hypebeast website 
+app.get("/scrape",function(req, res){
+    //Grab the body of the html with axios 
+    axios.get("/https://hypebeast.com/").then(function(response){
+        //we load into a shorthand selector 
+        const $ = cheerio.load(response.data);
+
+        //Now grab the h2 
+        $("h2").each(function(i, element){
+            //Save results in an empty object 
+            const result = {};
+
+            result.title = $(this)
+                .children("a")
+
+        })
 
 
+    })
 
-//Mongo DB connection to mongoose 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-
-//Solution from stack overflow to get rid of the warning message
-mongoose.connect("mongodb://localhost:27017/scrapehw", { useNewUrlParser: true });;
+    })
+})
 
