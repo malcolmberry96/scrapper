@@ -29,7 +29,42 @@ $.ajax({
         //A textarea to add a new note body 
         $("#notes").append("<textarea id='bodyinput' name='body'></textarea");
         //A button to submit a new text 
-        $("#notes").append("button data-id=' " + data._id + " 'id='savenote'>>")
+        $("#notes").append("button data-id=' " + data._id + " 'id='savenote'>Save Note</button>");
+
+        //If there's a note in the article 
+        if (data.note) {
+            //Place the title of the note in the title input 
+            $("#titleinput").val(data.note.title);
+            //Place the body of the note in the body textarea 
+            $("#bodyinput").val(data.note.body);
+        }
+    });
+});
+//When you click the savenote button 
+$(document).on("click", "#savenote", function(){
+    //Grab the associated id to enable the click 
+    const thisId = $(this).attr("data-id");
+
+    //Run a POST request to change the note, using what's entered in the inputs 
+    $.ajax({
+        method: "POST",
+        url: "/articles/" + thisId,
+        data: {
+            //Value taken from title input 
+            title: $("#titleinput").val(),
+            //Value from note textarea 
+            body: $("#bodyinput").val()
+        }
     })
-})
+    //Log response 
+    .then(function(data){
+        console.log(data);
+        //Empty the notes section 
+        $("notes").empty();
+    });
+
+    //Remove the values entered in the input and textarea for not entry 
+    $("#tittleinput").val("");
+    $("#bodyinput").val("");
+});
 
