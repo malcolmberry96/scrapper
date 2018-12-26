@@ -8,7 +8,7 @@ const ArticleSchema = new Schema({
     //required link and type of string
     title: {
         type: String,
-        required: True
+        required: true
     },
     //required link and type of string 
     link: {

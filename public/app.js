@@ -1,5 +1,5 @@
 
-$.getJSON("/article", function(data){
+$.getJSON("/articles", function(data){
     //Fore each article 
     for (const i = 0; i < data.length; i++){
         //Display the article on the page
@@ -8,7 +8,7 @@ $.getJSON("/article", function(data){
 });
 
 //Whenever someone clicks a p-tag
-$document.on("click", "p", function(){
+$(document).on("click", "p", function(){
     //Empty the notes from the note section 
     $("#notes").empty();
     //Save the id from the p tag 
@@ -17,7 +17,7 @@ $document.on("click", "p", function(){
 //Now make an ajax call for the Article 
 $.ajax({
     method:"GET",
-    url: "/articles" + thisId
+    url: "/articles/" + thisId
 })
     //With that done, add the note information to the page 
     .then(function(data){

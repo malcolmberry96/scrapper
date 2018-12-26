@@ -1,10 +1,10 @@
 //Dependencies 
 const express = require("express");
-const logger = require("logger");
+const logger = require("morgan");
 const mongoose = require("mongoose");
 
 //scrapping tools 
-const cheerio = require("cherrio");
+const cheerio = require("cheerio");
 const axios = require("axios");
 
 //models 
@@ -12,9 +12,8 @@ const db = require("./models");
 
 const PORT = 3000;
 
-//Initialize express 
+const app = express();
 
-const express = require("express");
 
 //Use morgan logger for logging requests 
 app.use(logger("dev"));
@@ -32,7 +31,7 @@ mongoose.connect("mongodb://localhost/scrapperhw", { useNewUrlParser: true });
 //A GET route for scraping the Hypebeast website 
 app.get("/scrape",function(req, res){
     //Grab the body of the html with axios 
-    axios.get("/https://hypebeast.com/").then(function(response){
+    axios.get("http://www.echojs.com/").then(function(response){
         //we load into a shorthand selector 
         const $ = cheerio.load(response.data);
 
