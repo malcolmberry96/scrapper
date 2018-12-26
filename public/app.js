@@ -29,7 +29,7 @@ $.ajax({
         //A textarea to add a new note body 
         $("#notes").append("<textarea id='bodyinput' name='body'></textarea");
         //A button to submit a new text 
-        $("#notes").append("button data-id=' " + data._id + " 'id='savenote'>Save Note</button>");
+        $("#notes").append("<button data-id='" + data._id + "'id='savenote'>Save Note</button>");
 
         //If there's a note in the article 
         if (data.note) {
