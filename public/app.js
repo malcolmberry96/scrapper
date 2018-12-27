@@ -12,7 +12,7 @@ $(document).on("click", "p", function(){
     //Empty the notes from the note section 
     $("#notes").empty();
     //Save the id from the p tag 
-    const thisId = $(this).attr("data-id");
+    let thisId = $(this).attr("data-id");
 
 //Now make an ajax call for the Article 
 $.ajax({
@@ -23,11 +23,11 @@ $.ajax({
     .then(function(data){
         console.log(data);
         //The title of the article 
-        $("#notes").append("<h2>" + data.title + "<h2>")
+        $("#notes").append("<h2>" + data.title + "</h2>")
         //An input to enter a new title 
         $("#notes").append("<input id='titleinput' name='title' >");
         //A textarea to add a new note body 
-        $("#notes").append("<textarea id='bodyinput' name='body'></textarea");
+        $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
         //A button to submit a new text 
         $("#notes").append("<button data-id='" + data._id + "'id='savenote'>Save Note</button>");
 
@@ -43,7 +43,7 @@ $.ajax({
 //When you click the savenote button 
 $(document).on("click", "#savenote", function(){
     //Grab the associated id to enable the click 
-    const thisId = $(this).attr("data-id");
+    let thisId = $(this).attr("data-id");
 
     //Run a POST request to change the note, using what's entered in the inputs 
     $.ajax({
@@ -60,7 +60,7 @@ $(document).on("click", "#savenote", function(){
     .then(function(data){
         console.log(data);
         //Empty the notes section 
-        $("notes").empty();
+        $("#notes").empty();
     });
 
     //Remove the values entered in the input and textarea for not entry 
