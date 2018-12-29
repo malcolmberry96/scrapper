@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //Connect to the MONGO DB 
-mongoose.connect("mongodb://localhost/scrapperhw", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/scrapperhw", { useNewUrlParser: false });
 
 //Routes 
 
@@ -35,8 +35,8 @@ app.get("/scrape",function(req, res){
         //we load into a shorthand selector 
         const $ = cheerio.load(response.data);
 
-        //Now grab the h2 
-        $("h2").each(function(i, element){
+        //Now grab the trending story tag
+        $("article h2").each(function(i, element){
             //Save results in an empty object 
             const result = {};
 
@@ -44,7 +44,7 @@ app.get("/scrape",function(req, res){
                 .children("a")
                 .text();
             result.link = $(this)
-                .children("a")
+                .children("h2")
                 .attr("href");
         //New article created using the result object built from scraping
         db.Article.create(result)
