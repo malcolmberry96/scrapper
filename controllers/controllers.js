@@ -31,7 +31,7 @@ router.get("/", function(req,res){
 //GET request to scrape the verge website 
 router.get("/scrape", function(req,res){
     //grab the body of html with request 
-    request("http://www.theverge.com/tech", function(error,response,html){
+    request("http://www.theverge.com/tech", function(error,response,html) {
     const $ = cheerio.load(html);
     const titlesArray = [];
     //Grab articles by the class 
@@ -180,6 +180,4 @@ newComment.save(function(err,doc){
     }
 });
     
-});
-
 module.exports = router;

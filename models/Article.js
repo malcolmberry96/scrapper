@@ -18,10 +18,10 @@ const ArticleSchema = new Schema({
     //note is an object that stores the not id 
     //the ref property links the objectid to the not model 
     //allows to populate with the associated note 
-    note: {
+    comment: [{
         type: Schema.Types.ObjectId,
-        ref: "Note"
-    }
+        ref: "Comment"
+    }]
 });
 
 const Article = mongoose.model("Article", ArticleSchema);
