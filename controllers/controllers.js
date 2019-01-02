@@ -151,10 +151,10 @@ router.get("/readArticle/:id", function(req,res){
 });
 //Create a new comment 
 router.post("/comment/:id", function(req, res){
-    const user = req.body.name;
-    const content = req.body.test;
-    const articleId = req.params.id;
-});
+    let user = req.body.name;
+    let content = req.body.test;
+    let articleId = req.params.id;
+
 //submitted form 
 const result = {
     name: user,
@@ -178,6 +178,7 @@ newComment.save(function(err,doc){
             }
         });
     }
+});
 });
     
 module.exports = router;
