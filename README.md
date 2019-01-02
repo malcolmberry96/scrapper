@@ -4,7 +4,7 @@ News scrapping application that takes the top articles from the Verge - Tech and
 
 The home page is where the user will be able to scrape articles on The Verge - Tech by hitting the "Scrape" button in the navbar. 
 
-# <img width="1275" alt="front-page" src="https://user-images.githubusercontent.com/39191969/50610567-0f3dbc00-0e99-11e9-84f1-3e50cdf849d6.png">
+<img width="1274" alt="screen 1" src="https://user-images.githubusercontent.com/39191969/50617318-29d05f00-0eb2-11e9-9163-d4750b1c382e.png">
 
 Once a user selects "Read Article" they are rediricted to the article page where they can skim through a sample of the article and make a comment on it. The user's comment will then be displayed at the bottom of the screen in a comments section. 
 
