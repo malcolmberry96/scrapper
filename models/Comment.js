@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 //Refrence to the schema constructor 
-const Schema = mongoose.Schema;
+let Schema = mongoose.Schema;
 
 //Using the schema constructor a note schema object is created 
-const CommentSchema = new Schema({
+let CommentSchema = new Schema({
     name: {
         type: String
     },
@@ -15,7 +15,7 @@ const CommentSchema = new Schema({
 });
 
 //creates model using mongoose 
-const Comment = mongoose.model("Comment", CommentSchema);
+let Comment = mongoose.model("Comment", CommentSchema);
 
-//Export the Note model 
+//Export the Comment model 
 module.export = Comment;
