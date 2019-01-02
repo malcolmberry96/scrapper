@@ -24,10 +24,15 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 //connecting to  MongoDB locally
-mongoose.connect("mongodb://localhost/scrapperhw", { useNewUrlParser: true });
+
+
+//mongoose.connect("mongodb://localhost/scrapperhw", { useNewUrlParser: true });
 
 //Mongo to Heoku
-//mongoose.connect(process.env.MONGODB_URI);
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:3000/scrapperhw';
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
