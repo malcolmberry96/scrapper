@@ -29,7 +29,7 @@ app.set("view engine", "handlebars");
 //mongoose.connect("mongodb://localhost/scrapperhw", { useNewUrlParser: true });
 
 //Mongo to Heoku
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:3000/scrapperhw';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/scrapperhw';
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
