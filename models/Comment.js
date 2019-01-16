@@ -18,4 +18,4 @@ let CommentSchema = new Schema({
 let Comment = mongoose.model("Comment", CommentSchema);
 
 //Export the Comment model 
-module.export = Comment;
+module.exports = Comment;
